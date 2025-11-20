@@ -346,6 +346,7 @@ header .container .menu:hover {
 }
 .reel-frame:hover {
   opacity: 0.8;
+  animation-play-state: paused;
 }
 .reel-video {
   max-width: 100%;
