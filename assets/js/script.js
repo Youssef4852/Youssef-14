@@ -1,1 +1,209 @@
-let scrollTop=document.querySelector(".scroll-top");window.addEventListener("scroll",()=>{scrollY>=100?(scrollTop.style.transform="scale(1)",scrollTop.style.right="30px"):(scrollTop.style.transform="scale(0)",scrollTop.style.right="0")}),scrollTop.addEventListener("click",()=>{window.scrollTo(0,0)});let headerScroll=document.querySelector("header");document.addEventListener("scroll",()=>{scrollY>50?headerScroll.classList.add("scrolled"):headerScroll.classList.remove("scrolled")}),document.addEventListener("contextmenu",()=>null);let DrobDownMenu=document.querySelector(".menu-dropDown"),OverlayDrobDownMenu=document.querySelector(".overlay"),DrobDownMenuRefereshListItem=document.querySelector(".menu-dropDown ul li.refresh-listItem"),DrobDownMenuInspectListItem=document.querySelector(".menu-dropDown ul li.inspect-listItem"),dropDownListItemsLocation=document.querySelectorAll(".menu-dropDown ul li[data-locate]");document.addEventListener("contextmenu",e=>{e.preventDefault(),DrobDownMenu.style.left=e.clientX+"px",DrobDownMenu.style.top=e.clientY+"px",DrobDownMenu.style.display="block",OverlayDrobDownMenu.style.display="block"}),OverlayDrobDownMenu.addEventListener("click",()=>{DrobDownMenu.style.display="none",OverlayDrobDownMenu.style.display="none"}),DrobDownMenu.addEventListener("click",()=>{DrobDownMenu.style.display="none",OverlayDrobDownMenu.style.display="none"}),DrobDownMenuRefereshListItem.addEventListener("click",()=>{window.location.reload()}),DrobDownMenuInspectListItem.addEventListener("click",()=>{alert("Press F12 Or Ctrl+Shift+I Or Ctrl+Shift+C To Open Developer Tools.")}),dropDownListItemsLocation.forEach(e=>{e.addEventListener("click",()=>{window.location.href=`#${e.dataset.locate}`})});let unOrderlist=document.querySelector("header ul"),listItems=document.querySelectorAll("header ul li"),menu=document.querySelector("header .container .menu");listItems.forEach(e=>{e.addEventListener("click",()=>{listItems.forEach(e=>e.classList.remove("active")),e.classList.add("active"),location.href=`#${e.dataset.location}`})});let listItemsScroll=document.querySelectorAll("header ul li"),sectionScroll=document.querySelectorAll("section");window.addEventListener("scroll",()=>{let e=window.scrollY;sectionScroll.forEach(t=>{let l=t.offsetHeight,s=t.offsetTop-50,o=t.getAttribute("id");if(e>=s&&e<s+l){listItemsScroll.forEach(e=>e.classList.remove("active"));let r=document.querySelector(`header ul li[data-location='${o}']`);r&&r.classList.add("active")}})}),menu.addEventListener("click",e=>{unOrderlist.style.left="0",e.stopPropagation()}),document.addEventListener("click",()=>{unOrderlist.style.left="-100%"});let homeShadow=document.querySelector(".home"),homeShadowList=["-10px 0px","0px -20px","10px 0px","20px 10px"];setInterval(()=>{let e=homeShadowList[Math.floor(Math.random()*homeShadowList.length)];homeShadow.style.setProperty("--home-shadow",`${e} 1000px #d62a3562`)},500);let startsIcons=document.querySelectorAll(".testimonials .stars-icon i");startsIcons.forEach(e=>{let t=e.className;e.classList.contains("bx-star")?e.addEventListener("mouseenter",()=>{e.classList.replace("bx-star","bxs-star")}):e.classList.contains("bxs-star")&&e.addEventListener("mouseenter",()=>{e.classList.replace("bxs-star","bx-star")}),e.addEventListener("mouseleave",()=>{e.className=t})});let faqs=document.querySelectorAll(".question");faqs.forEach(e=>{let t=e.querySelector(".question-text"),l=e.querySelector("i");e.addEventListener("click",()=>{t.classList.contains("showed")?(t.classList.remove("showed"),l.classList.replace("bx-minus","bx-plus")):(faqs.forEach(e=>{let t=e.querySelector(".question-text"),l=e.querySelector("i");t.classList.remove("showed"),l.classList.replace("bx-minus","bx-plus")}),t.classList.add("showed"),l.classList.replace("bx-plus","bx-minus"))})});let inputs=document.querySelectorAll(".contact form .input-field input,.contact form .input-field textarea"),submitButton=document.querySelector(".contact form button");inputs.forEach(e=>{let t=e.previousElementSibling;e.addEventListener("focus",()=>{t.style.top="-11px"}),e.addEventListener("blur",()=>{""==e.value&&(t.style.top="15px")})});let fullYear=document.querySelector("footer .footer-text span"),date=new Date;fullYear.innerHTML=date.getFullYear();
+// Scroll To Top Button
+let scrollTop = document.querySelector(".scroll-top");
+
+window.addEventListener("scroll", () => {
+  if (scrollY >= 100) {
+    scrollTop.style.transform = "scale(1)";
+    scrollTop.style.right = "30px";
+  } else {
+    scrollTop.style.transform = "scale(0)";
+    scrollTop.style.right = "0";
+  }
+});
+
+scrollTop.addEventListener("click", () => {
+  window.scrollTo(0, 0);
+});
+
+// On Document Scroll
+let headerScroll = document.querySelector("header");
+
+document.addEventListener("scroll", () => {
+  if (scrollY > 50) {
+    headerScroll.classList.add("scrolled");
+  } else {
+    headerScroll.classList.remove("scrolled");
+  }
+});
+
+document.addEventListener("contextmenu", () => {
+  return null;
+});
+
+// On Reel Right Click (contextmenu)
+let DrobDownMenu = document.querySelector(".menu-dropDown");
+let OverlayDrobDownMenu = document.querySelector(".overlay");
+let DrobDownMenuRefereshListItem = document.querySelector(
+  ".menu-dropDown ul li.refresh-listItem"
+);
+let DrobDownMenuInspectListItem = document.querySelector(
+  ".menu-dropDown ul li.inspect-listItem"
+);
+let dropDownListItemsLocation = document.querySelectorAll(
+  ".menu-dropDown ul li[data-locate]"
+);
+
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+
+  DrobDownMenu.style.left = e.clientX + "px";
+  DrobDownMenu.style.top = e.clientY + "px";
+  DrobDownMenu.style.display = "block";
+  OverlayDrobDownMenu.style.display = "block";
+});
+
+OverlayDrobDownMenu.addEventListener("click", () => {
+  DrobDownMenu.style.display = "none";
+  OverlayDrobDownMenu.style.display = "none";
+});
+
+DrobDownMenu.addEventListener("click", () => {
+  DrobDownMenu.style.display = "none";
+  OverlayDrobDownMenu.style.display = "none";
+});
+
+DrobDownMenuRefereshListItem.addEventListener("click", () => {
+  window.location.reload();
+});
+
+DrobDownMenuInspectListItem.addEventListener("click", () => {
+  alert("Press F12 Or Ctrl+Shift+I Or Ctrl+Shift+C To Open Developer Tools.");
+});
+
+dropDownListItemsLocation.forEach((li) => {
+  li.addEventListener("click", () => {
+    window.location.href = `#${li.dataset.locate}`;
+  });
+});
+
+// On Menu Icon Click (Show Un Order List)
+let unOrderlist = document.querySelector("header ul");
+let listItems = document.querySelectorAll("header ul li");
+let menu = document.querySelector("header .container .menu");
+
+// Loop On List Items
+listItems.forEach((li) => {
+  // Add Active Class On Li Click
+  li.addEventListener("click", () => {
+    // Remove Active Class On All List Items
+    listItems.forEach((liRemove) => liRemove.classList.remove("active"));
+    li.classList.add("active");
+
+    // Go To Section From Dataset Location
+    location.href = `#${li.dataset.location}`;
+  });
+});
+
+// Active Header Item On Scrolled
+let listItemsScroll = document.querySelectorAll("header ul li");
+let sectionScroll = document.querySelectorAll("section");
+
+window.addEventListener("scroll", () => {
+  let scrollY = window.scrollY;
+  sectionScroll.forEach((section) => {
+    let sectionHeight = section.offsetHeight;
+    let sectionTop = section.offsetTop - 50;
+    let sectionId = section.getAttribute("id");
+
+    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+      listItemsScroll.forEach((li) => li.classList.remove("active"));
+
+      let activeLink = document.querySelector(
+        `header ul li[data-location='${sectionId}']`
+      );
+      if (activeLink) activeLink.classList.add("active");
+    }
+  });
+});
+menu.addEventListener("click", (e) => {
+  unOrderlist.style.left = "0";
+  e.stopPropagation();
+});
+document.addEventListener("click", () => {
+  unOrderlist.style.left = "-100%";
+});
+
+// Change Box Shadow In Home Section
+let homeShadow = document.querySelector(".home");
+let homeShadowList = ["-10px 0px", "0px -20px", "10px 0px", "20px 10px"];
+
+setInterval(() => {
+  let homeShadowListRandom =
+    homeShadowList[Math.floor(Math.random() * homeShadowList.length)];
+  homeShadow.style.setProperty(
+    "--home-shadow",
+    `${homeShadowListRandom} 1000px #d62a3562`
+  );
+}, 500);
+
+// On Testimonials Icon (.stars-icon) Hover
+
+let startsIcons = document.querySelectorAll(".testimonials .stars-icon i");
+startsIcons.forEach((icon) => {
+
+  let defaultClass = icon.className;
+
+  if (icon.classList.contains("bx-star")) {
+    icon.addEventListener("mouseenter", () => {
+      icon.classList.replace("bx-star", "bxs-star");
+    });
+  } else if (icon.classList.contains("bxs-star")) {
+    icon.addEventListener("mouseenter", () => {
+      icon.classList.replace("bxs-star", "bx-star");
+    });
+  }
+  icon.addEventListener("mouseleave", () => {
+    icon.className = defaultClass
+  })
+});
+
+// Faq Show Text And Remove
+let faqs = document.querySelectorAll(".question");
+
+faqs.forEach((faq) => {
+  let text = faq.querySelector(".question-text");
+  let icon = faq.querySelector("i");
+
+  faq.addEventListener("click", () => {
+    if (text.classList.contains("showed")) {
+      text.classList.remove("showed");
+      icon.classList.replace("bx-minus", "bx-plus");
+    } else {
+      faqs.forEach((faqRemove) => {
+        let textRemove = faqRemove.querySelector(".question-text");
+        let iconRemove = faqRemove.querySelector("i");
+
+        textRemove.classList.remove("showed");
+        iconRemove.classList.replace("bx-minus", "bx-plus");
+      });
+      text.classList.add("showed");
+      icon.classList.replace("bx-plus", "bx-minus");
+    }
+  });
+});
+// On Contact Input Foucs (Move Label)
+let inputs = document.querySelectorAll(
+  ".contact form .input-field input,.contact form .input-field textarea"
+);
+let submitButton = document.querySelector(".contact form button");
+
+inputs.forEach((input) => {
+  let label = input.previousElementSibling;
+
+  input.addEventListener("focus", () => {
+    label.style.top = "-11px";
+  });
+
+  input.addEventListener("blur", () => {
+    if (input.value == "") {
+      label.style.top = "15px";
+    }
+  });
+});
+
+// Set Year In Footer Text
+let fullYear = document.querySelector("footer .footer-text span");
+
+let date = new Date();
+
+fullYear.innerHTML = date.getFullYear();
