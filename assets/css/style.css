@@ -769,7 +769,7 @@ header .container .menu:hover {
   display: block;
 }
 @media (max-width: 991px) {
-  .contact .container {
+  .contact .forms {
     flex-direction: column;
     gap: 50px;
   }
